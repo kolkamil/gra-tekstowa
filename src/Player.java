@@ -35,11 +35,11 @@ public class Player {
         return playerName;
     }
 
-    public void displayNameAndHp(){
-        System.out.println(getPlayerName() + " Twoje HP: " + getPlayerHp());
+    public void displayNameHpAttack() {
+        System.out.println(getPlayerName() + " Twoje HP: " + getPlayerHp() + " Wartość ataku: " + getPlayerAttack() + "\n");
     }
 
-    public void fight(int enemyAttack){
+    public void fight(int enemyAttack) {
         playerHp -= enemyAttack;
     }
 

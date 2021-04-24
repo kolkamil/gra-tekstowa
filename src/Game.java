@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Game {
     Random generator = new Random();
     Player player = new Player(100, 10);
-    Monster monster = new Monster("Troll", 100,10);
+    Monster monster = new Monster("Troll", 100, 8);
     boolean shouldContinue = true;
     Scanner scanner = new Scanner(System.in);
 
@@ -15,16 +15,16 @@ public class Game {
 
     public void gameMenu() {
         while (shouldContinue) {
-            System.out.println("1.Sprawdź ilość swojego HP");
+            System.out.println("1.Sprawdź ilość swojego HP i wartość ataku");
             System.out.println("2.Fight");
             System.out.println("3.Sprawdź wartość swojego ataku");
-            System.out.println("4. Wyjdź");
+            System.out.println("4.Wyjdź");
             int choice = scanner.nextInt();
 
             switch (choice) {
-                case 1 -> player.displayNameAndHp();
+                case 1 -> player.displayNameHpAttack();
                 case 2 -> fight();
-                case 3 -> System.out.println("Wartość twojego ataku: " + player.getPlayerAttack());
+                case 3 -> System.out.println("Wartość twojego ataku: " + player.getPlayerAttack() + "\n");
                 case 4 -> shouldContinue = false;
             }
         }
@@ -32,19 +32,26 @@ public class Game {
 
     public void fight() {
         System.out.println("Spotykasz na swojej drodze trolla. Walka!");
-
         while (player.getPlayerHp() >= 0 && monster.getMonsterHp() >= 0) {
             player.setPlayerAttack(generator.nextInt(10));
-            System.out.println("Atak playera " + player.getPlayerAttack());
+            monster.setMonsterAttack(generator.nextInt(8));
+            System.out.println("Atak playera " + player.getPlayerAttack() + " Atak monstera " + monster.getMonsterAttack());
             String fightResult = "Hp gracza " + player.playerHp + " " + "Hp monstera " + monster.getMonsterHp();
             System.out.println(fightResult);
             player.fight(monster.getMonsterAttack());
             monster.fight(player.getPlayerAttack());
+            if (monster.getMonsterHp() <= 0) {
+                System.out.println("Pokonałeś potwora!");
+            }
+            if (player.getPlayerHp() <= 0) {
+                System.out.println("Zostałeś pokonany!");
+            }
         }
     }
 
 
-
 }
+
+
 
 // Klasa Game zawierać będzie obiekty innych klas, w których będą się "Spotykać"
