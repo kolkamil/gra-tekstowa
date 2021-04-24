@@ -43,5 +43,9 @@ public class Player {
         playerHp -= enemyAttack;
     }
 
+    public void drinkPotion(int potion){
+        playerHp += potion;
+    }
+
 
 }

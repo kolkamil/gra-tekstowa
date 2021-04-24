@@ -7,6 +7,7 @@ public class Game {
     Monster monster = new Monster("Troll", 100, 8);
     boolean shouldContinue = true;
     Scanner scanner = new Scanner(System.in);
+    Potion hpPotion = new Potion("HP Potion", 10);
 
 
     public void introduceYourself() {
@@ -17,14 +18,14 @@ public class Game {
         while (shouldContinue) {
             System.out.println("1.Sprawdź ilość swojego HP i wartość ataku");
             System.out.println("2.Fight");
-            System.out.println("3.Sprawdź wartość swojego ataku");
+            System.out.println("3.Wypij miksturę HP");
             System.out.println("4.Wyjdź");
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1 -> player.displayNameHpAttack();
                 case 2 -> fight();
-                case 3 -> System.out.println("Wartość twojego ataku: " + player.getPlayerAttack() + "\n");
+                case 3 -> drinkPotion();
                 case 4 -> shouldContinue = false;
             }
         }
@@ -47,6 +48,11 @@ public class Game {
                 System.out.println("Zostałeś pokonany!");
             }
         }
+    }
+
+    public void drinkPotion(){
+        player.drinkPotion(hpPotion.getPotionValue());
+        System.out.println("Twoje HP po wypiciu mikstury to: " + player.getPlayerHp());
     }
 
 
