@@ -2,19 +2,23 @@ import java.util.Scanner;
 
 public class Player {
     private String playerName;
-    int playerHp;
-    int playerAttack;
-
-    public void setPlayerAttack(int playerAttack) {
-        this.playerAttack = playerAttack;
-
-    }
+    private int playerHp;
+    private int playerAttack;
 
     Scanner scanner = new Scanner(System.in);
 
     public Player(int playerHp, int playerAttack) {
         this.playerHp = playerHp;
         this.playerAttack = playerAttack;
+    }
+
+    public void setPlayerAttack(int playerAttack) {
+        this.playerAttack = playerAttack;
+
+    }
+
+    public int getPlayerAttack() {
+        return playerAttack;
     }
 
     public String getPlayerName() {
@@ -25,8 +29,8 @@ public class Player {
         return playerHp;
     }
 
-    public int getPlayerAttack() {
-        return playerAttack;
+    public void displayNameHpAttack() {
+        System.out.println(getPlayerName() + " Twoje HP: " + getPlayerHp() + " Wartość ataku: " + getPlayerAttack() + "\n");
     }
 
     String introduceYourself() {
@@ -35,15 +39,11 @@ public class Player {
         return playerName;
     }
 
-    public void displayNameHpAttack() {
-        System.out.println(getPlayerName() + " Twoje HP: " + getPlayerHp() + " Wartość ataku: " + getPlayerAttack() + "\n");
-    }
-
     public void fight(int enemyAttack) {
         playerHp -= enemyAttack;
     }
 
-    public void drinkPotion(int potion){
+    public void drinkPotion(int potion) {
         playerHp += potion;
     }
 

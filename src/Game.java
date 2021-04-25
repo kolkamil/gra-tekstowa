@@ -37,7 +37,7 @@ public class Game {
             player.setPlayerAttack(generator.nextInt(10));
             monster.setMonsterAttack(generator.nextInt(8));
             System.out.println("Atak playera " + player.getPlayerAttack() + " Atak monstera " + monster.getMonsterAttack());
-            String fightResult = "Hp gracza " + player.playerHp + " " + "Hp monstera " + monster.getMonsterHp();
+            String fightResult = "Hp gracza " + player.getPlayerHp() + " " + "Hp monstera " + monster.getMonsterHp();
             System.out.println(fightResult);
             player.fight(monster.getMonsterAttack());
             monster.fight(player.getPlayerAttack());
@@ -50,14 +50,13 @@ public class Game {
         }
     }
 
-    public void drinkPotion(){
+    public void drinkPotion() {
         player.drinkPotion(hpPotion.getPotionValue());
         System.out.println("Twoje HP po wypiciu mikstury to: " + player.getPlayerHp());
     }
 
 
 }
-
 
 
 // Klasa Game zawierać będzie obiekty innych klas, w których będą się "Spotykać"
