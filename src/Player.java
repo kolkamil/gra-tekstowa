@@ -4,12 +4,15 @@ public class Player {
     private String playerName;
     private int playerHp;
     private int playerAttack;
+    private int playerGold;
+
 
     Scanner scanner = new Scanner(System.in);
 
-    public Player(int playerHp, int playerAttack) {
+    public Player(int playerHp, int playerAttack, int playerGold) {
         this.playerHp = playerHp;
         this.playerAttack = playerAttack;
+        this.playerGold = playerGold;
     }
 
     public void setPlayerAttack(int playerAttack) {
@@ -27,6 +30,14 @@ public class Player {
 
     public int getPlayerHp() {
         return playerHp;
+    }
+
+    public int getPlayerGold() {
+        return playerGold;
+    }
+
+    public void setPlayerGold(int playerGold) {
+        this.playerGold = playerGold;
     }
 
     public void displayNameHpAttack() {

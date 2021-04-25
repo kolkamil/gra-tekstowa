@@ -3,11 +3,12 @@ import java.util.Scanner;
 
 public class Game {
     Random generator = new Random();
-    Player player = new Player(100, 10);
+    Player player = new Player(100, 10,100);
     Monster monster = new Monster("Troll", 100, 8);
     boolean shouldContinue = true;
     Scanner scanner = new Scanner(System.in);
     Potion hpPotion = new Potion("HP Potion", 10);
+    WeaponShop weaponShop = new WeaponShop();
 
 
     public void introduceYourself() {
@@ -19,14 +20,16 @@ public class Game {
             System.out.println("1.Sprawdź ilość swojego HP i wartość ataku");
             System.out.println("2.Fight");
             System.out.println("3.Wypij miksturę HP");
-            System.out.println("4.Wyjdź");
-            int choice = scanner.nextInt();
+            System.out.println("4.Odwiedź sklep");
+            System.out.println("5.Wyjdź");
+            int userChoice = scanner.nextInt();
 
-            switch (choice) {
+            switch (userChoice) {
                 case 1 -> player.displayNameHpAttack();
                 case 2 -> fight();
                 case 3 -> drinkPotion();
-                case 4 -> shouldContinue = false;
+                case 4 -> weaponShop.shopMenu();
+                case 5 -> shouldContinue = false;
             }
         }
     }
