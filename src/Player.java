@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class Player {
     private String playerName;
     private int playerHp;
@@ -40,8 +39,8 @@ public class Player {
         this.playerGold = playerGold;
     }
 
-    public void displayNameHpAttack() {
-        System.out.println(getPlayerName() + " Twoje HP: " + getPlayerHp() + " Wartość ataku: " + getPlayerAttack() + "\n");
+    public void displayPlayerInformation() {
+        System.out.println(playerName + " Twoje HP: " + playerHp + " Wartość ataku: " + playerAttack + " Złoto: " + playerGold + "\n");
     }
 
     String introduceYourself() {
@@ -57,6 +56,12 @@ public class Player {
     public void drinkPotion(int potion) {
         playerHp += potion;
     }
+
+    public void buyItem(int itemPrice, int itemAttack){
+      playerGold -= itemPrice;
+      playerAttack += itemAttack;
+    }
+
 
 
 }

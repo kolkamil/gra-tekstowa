@@ -2,12 +2,13 @@ import java.util.LinkedList;
 
 public class Item {
     String itemName;
-
+    int itemPrice;
     int attackValue;
 
-    public Item(String itemName, int attackValue) {
+    public Item(String itemName, int attackValue, int itemPrice) {
         this.itemName = itemName;
         this.attackValue = attackValue;
+        this.itemPrice = itemPrice;
     }
 
     public String getItemName() {
@@ -18,9 +19,12 @@ public class Item {
         return attackValue;
     }
 
-    public String toString() {
-        return getItemName() + getAttackValue();
+    public int getItemPrice() {
+        return itemPrice;
     }
 
+    public String toString() {
+        return getItemName() + "Wartość ataku " + getAttackValue() + " Cena: " + getItemPrice();
+    }
 
 }
