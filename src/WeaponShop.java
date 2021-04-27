@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Set;
@@ -20,6 +18,7 @@ public class WeaponShop {
             System.out.println(item);
         }
     }
+
 
 //    public void itemBuy(int x, int y) {
 //        System.out.println("1. MIECZ");
@@ -56,6 +55,4 @@ public class WeaponShop {
 //            }
 //        }
 //    }
-
-
     }

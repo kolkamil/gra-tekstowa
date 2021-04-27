@@ -4,8 +4,6 @@ public class Player {
     private int playerHp;
     private int playerAttack;
     private int playerGold;
-
-
     Scanner scanner = new Scanner(System.in);
 
     public Player(int playerHp, int playerAttack, int playerGold) {
@@ -16,7 +14,6 @@ public class Player {
 
     public void setPlayerAttack(int playerAttack) {
         this.playerAttack = playerAttack;
-
     }
 
     public int getPlayerAttack() {

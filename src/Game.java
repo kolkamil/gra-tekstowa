@@ -1,20 +1,22 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    Random generator = new Random();
     Player player = new Player(100, 10, 100);
     Monster monster = new Monster("Troll", 100, 8);
-    boolean shouldContinue = true;
-    Scanner scanner = new Scanner(System.in);
     Potion hpPotion = new Potion("HP Potion", 10);
     WeaponShop weaponShop = new WeaponShop();
-
+    Scanner scanner = new Scanner(System.in);
+    Random generator = new Random();
+    boolean shouldContinue = true;
 
     public void introduceYourself() {
         player.introduceYourself();
+    }
+
+    public void drinkPotion() {
+        player.drinkPotion(hpPotion.getPotionValue());
+        System.out.println("Twoje HP po wypiciu mikstury to: " + player.getPlayerHp());
     }
 
     public void gameMenu() {
@@ -45,10 +47,10 @@ public class Game {
         int choice = scanner.nextInt();
         switch (choice) {
             case 1 -> {
-                if(player.getPlayerGold()>0) {
+                if (player.getPlayerGold() > 0) {
                     System.out.println("Kupiłeś miecz");
                     player.buyItem(weaponShop.sword.getItemPrice(), weaponShop.sword.getAttackValue());
-                }else
+                } else
                     System.out.println("Masz za mało złota!");
             }
             case 2 -> {
@@ -59,31 +61,29 @@ public class Game {
     }
 
     public void fight() {
-        System.out.println("Spotykasz na swojej drodze trolla. Walka!");
-        while (player.getPlayerHp() >= 0 && monster.getMonsterHp() >= 0) {
-            player.setPlayerAttack(generator.nextInt(10));
-            monster.setMonsterAttack(generator.nextInt(8));
-            System.out.println("Atak playera " + player.getPlayerAttack() + " Atak monstera " + monster.getMonsterAttack());
-            String fightResult = "Hp gracza " + player.getPlayerHp() + " " + "Hp monstera " + monster.getMonsterHp();
-            System.out.println(fightResult);
-            player.fight(monster.getMonsterAttack());
-            monster.fight(player.getPlayerAttack());
-            if (monster.getMonsterHp() <= 0) {
-                System.out.println("Pokonałeś potwora!");
+        if (monster.getMonsterHp() >= 0) {
+
+            System.out.println("Spotykasz na swojej drodze trolla. Walka!");
+            while (player.getPlayerHp() >= 0 && monster.getMonsterHp() >= 0) {
+                player.setPlayerAttack(generator.nextInt(10));
+                monster.setMonsterAttack(generator.nextInt(8));
+                String attackValues = ("Atak playera " + player.getPlayerAttack() + " Atak monstera " + monster.getMonsterAttack());
+                String fightResult = "Hp gracza " + player.getPlayerHp() + " Hp monstera " + monster.getMonsterHp();
+                System.out.println(fightResult);
+                System.out.println(attackValues);
+                player.fight(monster.getMonsterAttack());
+                monster.fight(player.getPlayerAttack());
+                if (monster.getMonsterHp() <= 0) {
+                    System.out.println("Pokonałeś potwora!");
+                }
+                if (player.getPlayerHp() <= 0) {
+                    System.out.println("Zostałeś pokonany!");
+                }
             }
-            if (player.getPlayerHp() <= 0) {
-                System.out.println("Zostałeś pokonany!");
-            }
+        } else {
+            System.out.println(monster.getMonsterName() + " już nie żyje!");
         }
     }
-
-    public void drinkPotion() {
-        player.drinkPotion(hpPotion.getPotionValue());
-        System.out.println("Twoje HP po wypiciu mikstury to: " + player.getPlayerHp());
-    }
-
-
 }
-
 
 // Klasa Game zawierać będzie obiekty innych klas, w których będą się "Spotykać"
