@@ -24,18 +24,15 @@ public class Game {
             System.out.println("1.Sprawdź ilość swojego HP, wartość ataku oraz stan złota");
             System.out.println("2.Przygoda");
             System.out.println("3.Wypij miksturę HP");
-            System.out.println("4.Odwiedź sklep");
-            System.out.println("5.Wyjdź");
-            int userChoice = scanner.nextInt();
+            System.out.println("4.Wyjdź");
+            String userChoice = scanner.nextLine();
 
             switch (userChoice) {
-                case 1 -> player.displayPlayerInformation();
-                case 2 -> chooseLocation();
-                case 3 -> drinkPotion();
-                case 4 -> {
+                case "1" -> player.displayPlayerInformation();
+                case "2" -> chooseLocation();
+                case "3" -> drinkPotion();
+                case "4" -> shouldContinue = false;
 
-                }
-                case 5 -> shouldContinue = false;
             }
         }
     }
@@ -43,16 +40,16 @@ public class Game {
     public void itemBuy() {
         System.out.println("1. MIECZ");
         System.out.println("2. Nóż");
-        int choice = scanner.nextInt();
+        String choice = scanner.nextLine();
         switch (choice) {
-            case 1 -> {
+            case "1" -> {
                 if (player.getPlayerGold() > 0) {
                     System.out.println("Kupiłeś miecz");
                     player.buyItem(weaponShop.sword.getItemPrice(), weaponShop.sword.getAttackValue());
                 } else
                     System.out.println("Masz za mało złota!");
             }
-            case 2 -> {
+            case "2" -> {
                 System.out.println("Kupiłeś nóż");
                 player.buyItem(weaponShop.knife.getItemPrice(), weaponShop.knife.getAttackValue());
             }
@@ -74,6 +71,8 @@ public class Game {
                 monster.fight(player.getPlayerAttack());
                 if (monster.getMonsterHp() <= 0) {
                     System.out.println("Pokonałeś potwora!");
+                    System.out.println("Dodano 10 golda");
+                    player.setPlayerGold(player.getPlayerGold() + 10);
                 }
                 if (player.getPlayerHp() <= 0) {
                     System.out.println("Zostałeś pokonany!");
@@ -86,29 +85,29 @@ public class Game {
 
     public void chooseLocation() {
         System.out.println("Wybierz gdzie chcesz iść");
-            System.out.println("1.Miasto");
-            System.out.println("2.Lochy");
-            int userChoice = scanner.nextInt();
-            switch (userChoice) {
-                case 1 -> {
-                    System.out.println("Wchodzisz do miasta.");
-                    System.out.println("1.Sklep\n2.Wyjdź");
-                    int userChoiceCity = scanner.nextInt();
-                    switch(userChoiceCity) {
-                        case 1 -> itemBuy();
-                        case 2 -> chooseLocation();
-                    }
+        System.out.println("1.Miasto");
+        System.out.println("2.Lochy");
+        String userChoice = scanner.nextLine();
+        switch (userChoice) {
+            case "1" -> {
+                System.out.println("Wchodzisz do miasta.");
+                System.out.println("1.Sklep\n2.Wyjdź");
+                String userChoiceCity = scanner.nextLine();
+                switch (userChoiceCity) {
+                    case "1" -> itemBuy();
+                    case "2" -> chooseLocation();
                 }
-                case 2 -> {
-                    System.out.println("Wchodzisz do lochów. W oddali widzisz zamazaną sylwetkę\n1.Podejdź\n2.Wyjdź z lochów");
-                    int userChoiceDungeon = scanner.nextInt();
-                    switch(userChoiceDungeon){
-                        case 1 -> fight();
-                        case 2-> chooseLocation();
-                    }
+            }
+            case "2" -> {
+                System.out.println("Wchodzisz do lochów. W oddali widzisz zamazaną sylwetkę\n1.Podejdź\n2.Wyjdź z lochów");
+                String userChoiceDungeon = scanner.nextLine();
+                switch (userChoiceDungeon) {
+                    case "1" -> fight();
+                    case "2" -> chooseLocation();
                 }
             }
         }
     }
+}
 
 // Klasa Game zawierać będzie obiekty innych klas, w których będą się "Spotykać"
