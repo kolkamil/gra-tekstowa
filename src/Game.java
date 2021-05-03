@@ -19,10 +19,10 @@ public class Game {
         System.out.println("Twoje HP po wypiciu mikstury to: " + player.getPlayerHp());
     }
 
-    public void gameMenu() {
+    public void gameStart() {
         while (shouldContinue) {
             System.out.println("1.Sprawdź ilość swojego HP, wartość ataku oraz stan złota");
-            System.out.println("2.Walka");
+            System.out.println("2.Przygoda");
             System.out.println("3.Wypij miksturę HP");
             System.out.println("4.Odwiedź sklep");
             System.out.println("5.Wyjdź");
@@ -30,11 +30,10 @@ public class Game {
 
             switch (userChoice) {
                 case 1 -> player.displayPlayerInformation();
-                case 2 -> fight();
+                case 2 -> chooseLocation();
                 case 3 -> drinkPotion();
                 case 4 -> {
-                    weaponShop.shopDisplayItems();
-                    itemBuy();
+
                 }
                 case 5 -> shouldContinue = false;
             }
@@ -84,6 +83,32 @@ public class Game {
             System.out.println(monster.getMonsterName() + " już nie żyje!");
         }
     }
-}
+
+    public void chooseLocation() {
+        System.out.println("Wybierz gdzie chcesz iść");
+            System.out.println("1.Miasto");
+            System.out.println("2.Lochy");
+            int userChoice = scanner.nextInt();
+            switch (userChoice) {
+                case 1 -> {
+                    System.out.println("Wchodzisz do miasta.");
+                    System.out.println("1.Sklep\n2.Wyjdź");
+                    int userChoiceCity = scanner.nextInt();
+                    switch(userChoiceCity) {
+                        case 1 -> itemBuy();
+                        case 2 -> chooseLocation();
+                    }
+                }
+                case 2 -> {
+                    System.out.println("Wchodzisz do lochów. W oddali widzisz zamazaną sylwetkę\n1.Podejdź\n2.Wyjdź z lochów");
+                    int userChoiceDungeon = scanner.nextInt();
+                    switch(userChoiceDungeon){
+                        case 1 -> fight();
+                        case 2-> chooseLocation();
+                    }
+                }
+            }
+        }
+    }
 
 // Klasa Game zawierać będzie obiekty innych klas, w których będą się "Spotykać"
