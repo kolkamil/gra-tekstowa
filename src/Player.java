@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Player {
     private String playerName;
     private int playerHp;
@@ -54,11 +55,16 @@ public class Player {
         playerHp += potion;
     }
 
-    public void buyItem(int itemPrice, int itemAttack){
-      playerGold -= itemPrice;
-      playerAttack += itemAttack;
+    public void buyItem(int itemPrice, int itemAttack) {
+        playerGold -= itemPrice;
+        playerAttack += itemAttack;
     }
 
+    public void playerIsDead() {
+        if (playerHp <= 0){
+            System.out.println(playerName + " Nie żyjesz!");
+        }
+    }
 
 
 }

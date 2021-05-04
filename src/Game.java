@@ -62,21 +62,15 @@ public class Game {
             System.out.println("Spotykasz na swojej drodze trolla. Walka!");
             while (player.getPlayerHp() >= 0 && monster.getMonsterHp() >= 0) {
                 player.setPlayerAttack(generator.nextInt(10));
-                monster.setMonsterAttack(generator.nextInt(8));
-                String attackValues = ("Atak playera " + player.getPlayerAttack() + " Atak monstera " + monster.getMonsterAttack());
+                monster.setMonsterAttack(generator.nextInt(6));
+                String attackValues = "Atak playera " + player.getPlayerAttack() + " Atak monstera " + monster.getMonsterAttack();
                 String fightResult = "Hp gracza " + player.getPlayerHp() + " Hp monstera " + monster.getMonsterHp();
                 System.out.println(fightResult);
                 System.out.println(attackValues);
                 player.fight(monster.getMonsterAttack());
                 monster.fight(player.getPlayerAttack());
-                if (monster.getMonsterHp() <= 0) {
-                    System.out.println("Pokonałeś potwora!");
-                    System.out.println("Dodano 10 golda");
-                    player.setPlayerGold(player.getPlayerGold() + 10);
-                }
-                if (player.getPlayerHp() <= 0) {
-                    System.out.println("Zostałeś pokonany!");
-                }
+                monster.monsterIsDead();
+                player.playerIsDead();
             }
         } else {
             System.out.println(monster.getMonsterName() + " już nie żyje!");
@@ -84,6 +78,10 @@ public class Game {
     }
 
     public void chooseLocation() {
+//            Monster[] monsterTable = new Monster[3];
+//            monsterTable[0] = new Monster("Gnom",100,5);
+//            monsterTable[1] = new Monster("Skrzat",100,2);
+//            monsterTable[2] = new Monster("Szkielet",100,1);
         System.out.println("Wybierz gdzie chcesz iść");
         System.out.println("1.Miasto");
         System.out.println("2.Lochy");

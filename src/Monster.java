@@ -36,5 +36,9 @@ public class Monster {
     public void fight(int playerAttack) {
         monsterHp -= playerAttack;
     }
-
+    public void monsterIsDead(){
+        if(monsterHp<=0){
+            System.out.println(monsterName + " Został pokonany!");
+        }
+    }
 }
