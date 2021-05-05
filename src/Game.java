@@ -56,32 +56,32 @@ public class Game {
         }
     }
 
-    public void fight() {
-        if (monster.getMonsterHp() >= 0) {
+    public void fight(Monster m, Player p) { //wzór dla wszystkich nowych obiektów do przeprowadzenia walki
 
-            System.out.println("Spotykasz na swojej drodze trolla. Walka!");
-            while (player.getPlayerHp() >= 0 && monster.getMonsterHp() >= 0) {
-                player.setPlayerAttack(generator.nextInt(10));
-                monster.setMonsterAttack(generator.nextInt(6));
-                String attackValues = "Atak playera " + player.getPlayerAttack() + " Atak monstera " + monster.getMonsterAttack();
-                String fightResult = "Hp gracza " + player.getPlayerHp() + " Hp monstera " + monster.getMonsterHp();
+        if (m.getMonsterHp() >= 0) {
+            System.out.println("Spotykasz na swojej drodze " + m.getMonsterName() + ". Walka!");
+            while (m.getMonsterHp() >= 0 && p.getPlayerHp() >= 0) {
+                p.setPlayerAttack(generator.nextInt(10));
+                m.setMonsterAttack(generator.nextInt(5));
+                p.fight(m.getMonsterAttack());
+                m.fight(p.getPlayerAttack());
+                m.monsterIsDead();
+                p.playerIsDead();
+                String attackValues = "Atak playera " + p.getPlayerAttack() + " Atak monstera " + m.getMonsterAttack();
+                String fightResult = "Hp gracza " + p.getPlayerHp() + " Hp monstera " + m.getMonsterHp();
                 System.out.println(fightResult);
                 System.out.println(attackValues);
-                player.fight(monster.getMonsterAttack());
-                monster.fight(player.getPlayerAttack());
-                monster.monsterIsDead();
-                player.playerIsDead();
             }
         } else {
-            System.out.println(monster.getMonsterName() + " już nie żyje!");
+            System.out.println(m.getMonsterName() + " już nie żyje!");
         }
     }
 
     public void chooseLocation() {
-//            Monster[] monsterTable = new Monster[3];
-//            monsterTable[0] = new Monster("Gnom",100,5);
-//            monsterTable[1] = new Monster("Skrzat",100,2);
-//            monsterTable[2] = new Monster("Szkielet",100,1);
+        Monster[] monsterTable = new Monster[3];
+        monsterTable[0] = new Monster("Gnom", 31, 5);
+        monsterTable[1] = new Monster("Skrzat", 100, 2);
+        monsterTable[2] = new Monster("Szkielet", 100, 1);
         System.out.println("Wybierz gdzie chcesz iść");
         System.out.println("1.Miasto");
         System.out.println("2.Lochy");
@@ -100,12 +100,14 @@ public class Game {
                 System.out.println("Wchodzisz do lochów. W oddali widzisz zamazaną sylwetkę\n1.Podejdź\n2.Wyjdź z lochów");
                 String userChoiceDungeon = scanner.nextLine();
                 switch (userChoiceDungeon) {
-                    case "1" -> fight();
+                    case "1" -> fight(monster, player);
                     case "2" -> chooseLocation();
                 }
             }
         }
     }
+
+
 }
 
 // Klasa Game zawierać będzie obiekty innych klas, w których będą się "Spotykać"
