@@ -56,13 +56,12 @@ public class Game {
         }
     }
 
-    public void fight(Monster m, Player p) { //wzór dla wszystkich nowych obiektów do przeprowadzenia walki
-
+    public void fight(Monster m, Player p, int playerAttack, int monsterAttack) { //wzór dla wszystkich nowych obiektów do przeprowadzenia walki
         if (m.getMonsterHp() >= 0) {
             System.out.println("Spotykasz na swojej drodze " + m.getMonsterName() + ". Walka!");
             while (m.getMonsterHp() >= 0 && p.getPlayerHp() >= 0) {
-                p.setPlayerAttack(generator.nextInt(10));
-                m.setMonsterAttack(generator.nextInt(5));
+                p.setPlayerAttack(generator.nextInt(playerAttack));
+                m.setMonsterAttack(generator.nextInt(monsterAttack));
                 p.fight(m.getMonsterAttack());
                 m.fight(p.getPlayerAttack());
                 m.monsterIsDead();
@@ -100,7 +99,7 @@ public class Game {
                 System.out.println("Wchodzisz do lochów. W oddali widzisz zamazaną sylwetkę\n1.Podejdź\n2.Wyjdź z lochów");
                 String userChoiceDungeon = scanner.nextLine();
                 switch (userChoiceDungeon) {
-                    case "1" -> fight(monster, player);
+                    case "1" -> fight(monster, player, player.getPlayerAttack(), monster.getMonsterAttack());
                     case "2" -> chooseLocation();
                 }
             }
